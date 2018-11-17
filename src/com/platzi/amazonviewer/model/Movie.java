@@ -3,6 +3,10 @@ package com.platzi.amazonviewer.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Clase movie que contiene las propiedades de una
+ * película.
+ */
 public class Movie extends Film implements IVisualizable {
 
 	private int timeViewed;
