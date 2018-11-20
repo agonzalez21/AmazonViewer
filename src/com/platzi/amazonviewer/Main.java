@@ -42,7 +42,7 @@ public class Main {
 				break;
 			
 			case 2:
-				//Main.showSeries();
+				Main.showSeries();
 				break;
 
 			case 3:
@@ -53,6 +53,41 @@ public class Main {
 			}
 
 		} while (option!=0);
+	}
+
+	private static void showSeries() {
+		// TODO Auto-generated method stub
+		System.out.println("-- Cataloge of Series --");
+		byte opcion = (byte)(0);
+		do {
+			
+			System.out.println("\n --- Select your serie: ---");
+			for (int index = 0; index < movies.size(); index++) {
+				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).isViewed());
+			}
+
+			System.out.println("0. Back.");
+			Scanner scan = new Scanner(System.in);
+			opcion = Byte.valueOf(scan.nextLine());
+			if(opcion==0)
+				return;//showMenu();
+
+			if(opcion>0) {
+				
+				Movie movieSelected = movies.get(opcion-1);
+				movieSelected.setViewed(true);
+				Date dateStar = movieSelected.startToSee(new Date());
+				
+				for (int i = 0; i < 10000; i++) {
+					System.out.println("Viewing ...");
+				}
+				
+				movieSelected.stopToSee(dateStar, new Date());
+				System.out.println("");
+				System.out.println("Viste: " + movieSelected);
+				System.out.println("Por: "+movieSelected.getTimeViewed() + " milisegundos");
+			}
+		} while (opcion!=0);
 	}
 
 	private static void showMovies() {
@@ -91,7 +126,7 @@ public class Main {
 	}
 	
 	private static void showBooks() {
-		System.out.println("-- Cataloge of books--");
+		System.out.println("-- Cataloge of Books--");
 		byte opcion = (byte)(0);
 		do {
 			
@@ -123,4 +158,7 @@ public class Main {
 			}
 		} while (opcion!=0);
 	}
+
+	
+	
 }
