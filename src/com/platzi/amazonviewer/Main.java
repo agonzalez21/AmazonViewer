@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.platzi.amazonviewer.model.Book;
 import com.platzi.amazonviewer.model.Movie;
 import com.platzi.amazonviewer.model.Serie;
 
@@ -11,7 +12,8 @@ public class Main {
 
 	static ArrayList<Movie> movies = Movie.makeMovies();
 	static ArrayList<Serie> series = Serie.makeSeries();
-
+	static ArrayList<Book> books = Book.makeBooks();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		showMenu();
@@ -131,9 +133,9 @@ public class Main {
 		byte opcion = (byte)(0);
 		do {
 
-			System.out.println("\n --- Select your serie: ---");
-			for (int index = 0; index < movies.size(); index++) {
-				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).isViewed());
+			System.out.println("\n --- Select your Book: ---");
+			for (int index = 0; index < books.size(); index++) {
+				System.out.println((index+1)+books.get(index).getTitle() + " ");
 			}
 
 			System.out.println("0. Back.");
@@ -144,18 +146,18 @@ public class Main {
 
 			if(opcion>0) {
 
-				Movie movieSelected = movies.get(opcion-1);
-				movieSelected.setViewed(true);
-				Date dateStar = movieSelected.startToSee(new Date());
-
-				for (int i = 0; i < 10000; i++) {
-					System.out.println("Viewing ...");
-				}
-
-				movieSelected.stopToSee(dateStar, new Date());
+				Book movieSelected = books.get(opcion-1);
+//				movieSelected.setViewed(true);
+//				Date dateStar = movieSelected.startToSee(new Date());
+//
+//				for (int i = 0; i < 10000; i++) {
+//					System.out.println("Viewing ...");
+//				}
+//
+//				movieSelected.stopToSee(dateStar, new Date());
 				System.out.println("");
-				System.out.println("Viste: " + movieSelected);
-				System.out.println("Por: "+movieSelected.getTimeViewed() + " milisegundos");
+				System.out.println("Leiste: " + movieSelected);
+				//System.out.println("Por: "+movieSelected.getTimeViewed() + " milisegundos");
 			}
 		} while (opcion!=0);
 	}

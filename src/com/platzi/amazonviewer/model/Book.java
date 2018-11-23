@@ -1,5 +1,6 @@
 package com.platzi.amazonviewer.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Book extends Redaccion{
@@ -35,6 +36,11 @@ public class Book extends Redaccion{
 	public Book(String title, Date editionDate, String editorial, String[] authors) {
 		super(title, editionDate, editorial, authors);
 		// TODO Auto-generated constructor stub
+	}
+
+	public static ArrayList<Book> makeBooks() {
+		// TODO Auto-generated method stub
+		return null;
 	}	
 	
 }
