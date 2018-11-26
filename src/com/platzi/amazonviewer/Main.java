@@ -3,8 +3,8 @@ package com.platzi.amazonviewer;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-
 import com.platzi.amazonviewer.model.Book;
+import com.platzi.amazonviewer.model.Magazine;
 import com.platzi.amazonviewer.model.Movie;
 import com.platzi.amazonviewer.model.Serie;
 
@@ -13,7 +13,8 @@ public class Main {
 	static ArrayList<Movie> movies = Movie.makeMovies();
 	static ArrayList<Serie> series = Serie.makeSeries();
 	static ArrayList<Book> books = Book.makeBooks();
-	
+	static ArrayList<Magazine> magazines = Magazine.makeMagazines();
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		showMenu();
@@ -27,7 +28,7 @@ public class Main {
 
 		do {
 			System.out.println("-- Welcome to AmazonViewer! --");
-			System.out.println("-- Menú: --");
+			System.out.println("-- Menï¿½: --");
 			System.out.println("1.Movies.");
 			System.out.println("2.Series.");
 			System.out.println("3.Books.");
@@ -49,12 +50,52 @@ public class Main {
 
 			case 3:
 				Main.showBooks();
+				break;
+
+			case 4:
+				Main.showMagazines();
+				break;
 
 			default:
 				break;
 			}
 
 		} while (option!=0);
+	}
+
+	private static void showMagazines() {
+		System.out.println("-- Cataloge of Magazines --");
+		byte opcion = (byte)(0);
+		do {
+
+			System.out.println("\n --- Select your magazine: ---");
+			for (int index = 0; index < magazines.size(); index++) {
+				System.out.println((index+1)+magazines.get(index).getTitle() + " "+magazines.get(index).getEditionDate()+magazines.get(index).getEditorial());
+			}
+
+			System.out.println("0. Back.");
+			Scanner scan = new Scanner(System.in);
+			opcion = Byte.valueOf(scan.nextLine());
+			if(opcion==0)
+				return;
+
+			if(opcion>0) {
+
+				Magazine magazineSelected = magazines.get(opcion-1);
+				System.out.println(magazineSelected);
+				//Date dateStar = serieSelected.startToSee(new Date());
+/*
+				for (int i = 0; i < 10000; i++) {
+					System.out.println("Viewing ...");
+				}*/
+				/*
+				serieSelected.stopToSee(dateStar, new Date());
+				System.out.println("");
+				System.out.println("Viste: " + serieSelected);
+				System.out.println("Por: "+serieSelected.getTimeViewed() + " milisegundos");
+				 */
+			}
+		} while (opcion!=0);
 	}
 
 	private static void showSeries() {
