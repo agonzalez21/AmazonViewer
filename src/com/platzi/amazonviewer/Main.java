@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.platzi.amazonviewer.model.Book;
 import com.platzi.amazonviewer.model.Movie;
 import com.platzi.amazonviewer.model.Serie;
 
@@ -11,7 +12,8 @@ public class Main {
 
 	static ArrayList<Movie> movies = Movie.makeMovies();
 	static ArrayList<Serie> series = Serie.makeSeries();
-
+	static ArrayList<Book> books = Book.makeBooks();
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		showMenu();
