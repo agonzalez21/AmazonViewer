@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Book extends Redaccion{
+public class Book extends Redaccion implements IVisualizable{
 
 	private int id;
 	private String isbn;
@@ -61,6 +61,33 @@ public class Book extends Redaccion{
 		}
 
 		return books;
+	}
+
+	public void view() {
+		setReaded(true);
+
+		Date dateStar = startToSee(new Date());
+
+		for (int i = 0; i < 10000; i++) {
+			System.out.println("Viewing ...");
+		}
+
+		stopToSee(dateStar, new Date());
+		System.out.println("");
+		System.out.println("Leiste: " + toString());
+		System.out.println("Por: " + getTimeReaded() + " milisegundos");
+	}
+
+	@Override
+	public Date startToSee(Date dateI) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void stopToSee(Date dateI, Date dateF) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

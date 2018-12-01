@@ -4,10 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import com.platzi.amazonviewer.model.Book;
+import com.platzi.amazonviewer.model.Chapter;
+import com.platzi.amazonviewer.model.Film;
 import com.platzi.amazonviewer.model.Magazine;
 import com.platzi.amazonviewer.model.Movie;
 import com.platzi.amazonviewer.model.Serie;
 
+/**
+ * <h1>AmazonViewer</h1>
+ * Programa que permite visualizar Movies, Series cons sus respectivos Chapters
+ * , Books y Magazines. Te permite generar reportes generales y con fecha del día.
+ * <p>
+ * Existen algunas reglas como que todos los elementos son visualizables.
+ * 
+ * @author Alberto González Balderas
+ * @version 1.0
+ * @since 2018
+ */
 public class Main {
 
 	static ArrayList<Movie> movies = Movie.makeMovies();
@@ -17,8 +30,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		showMenu();
-
 	}
 
 	private static void showMenu() {
@@ -84,7 +97,7 @@ public class Main {
 				Magazine magazineSelected = magazines.get(opcion-1);
 				System.out.println(magazineSelected);
 				//Date dateStar = serieSelected.startToSee(new Date());
-/*
+				/*
 				for (int i = 0; i < 10000; i++) {
 					System.out.println("Viewing ...");
 				}*/
@@ -106,7 +119,7 @@ public class Main {
 
 			System.out.println("\n --- Select your serie: ---");
 			for (int index = 0; index < series.size(); index++) {
-				System.out.println((index+1)+series.get(index).getTitle() + " "+series.get(index).isViewed());
+				System.out.println((index+1)+series.get(index).getTitle() + " "+series.get(index).getViewed());
 			}
 
 			System.out.println("0. Back.");
@@ -142,7 +155,7 @@ public class Main {
 
 			System.out.println("\n --- Select your movie: ---");
 			for (int index = 0; index < movies.size(); index++) {
-				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).isViewed());
+				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).getViewed());
 			}
 
 			System.out.println("0. Back.");
@@ -154,17 +167,7 @@ public class Main {
 			if(opcion>0) {
 
 				Movie movieSelected = movies.get(opcion-1);
-				movieSelected.setViewed(true);
-				Date dateStar = movieSelected.startToSee(new Date());
-
-				for (int i = 0; i < 10000; i++) {
-					System.out.println("Viewing ...");
-				}
-
-				movieSelected.stopToSee(dateStar, new Date());
-				System.out.println("");
-				System.out.println("Viste: " + movieSelected);
-				System.out.println("Por: "+movieSelected.getTimeViewed() + " milisegundos");
+				movieSelected.view();
 			}
 		} while (opcion!=0);
 	}
@@ -188,21 +191,40 @@ public class Main {
 			if(opcion>0) {
 
 				Book movieSelected = books.get(opcion-1);
-//				movieSelected.setViewed(true);
-//				Date dateStar = movieSelected.startToSee(new Date());
-//
-//				for (int i = 0; i < 10000; i++) {
-//					System.out.println("Viewing ...");
-//				}
-//
-//				movieSelected.stopToSee(dateStar, new Date());
-				System.out.println("");
-				System.out.println("Leiste: " + movieSelected);
-				//System.out.println("Por: "+movieSelected.getTimeViewed() + " milisegundos");
+				movieSelected.view();
 			}
 		} while (opcion!=0);
 	}
 
+	public static void showChapters(ArrayList<Chapter> chaptersOfSerieSelected) {
+		int exit = 1;
 
+		do {
+			System.out.println();
+			System.out.println(":: CHAPTERS ::");
+			System.out.println();
+
+
+			for (int i = 0; i < chaptersOfSerieSelected.size(); i++) { //1. Chapter 1
+				System.out.println(i+1 + ". " + chaptersOfSerieSelected.get(i).getTitle() + " Visto: " + chaptersOfSerieSelected.get(i).getViewed());
+			}
+
+			System.out.println("0. Regresar al Menu");
+			System.out.println();
+
+			//Leer Respuesta usuario
+			Scanner scan = new Scanner(System.in);
+			int response = Byte.valueOf(scan.nextLine());
+
+			if(response == 0) {
+				exit = 0;
+			}
+
+			if(response > 0) {
+				Chapter chapterSelected = chaptersOfSerieSelected.get(response-1);
+				chapterSelected.view();
+			}
+		}while(exit !=0);
+	}
 
 }
