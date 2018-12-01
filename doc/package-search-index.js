@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"com.platzi.amazonviewer"},{"l":"com.platzi.amazonviewer.model"}]
