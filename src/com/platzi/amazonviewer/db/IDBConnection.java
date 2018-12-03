@@ -8,7 +8,7 @@ public interface IDBConnection {
 	
 	default Connection connectToDB()
 	{
-		Connection connection = null;
+		java.sql.Connection connection = null;
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

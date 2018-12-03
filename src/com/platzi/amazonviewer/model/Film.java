@@ -31,8 +31,16 @@ public abstract class Film {
 		this.duration = duration;
 	}
 	
+	public Film() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getTitle() {

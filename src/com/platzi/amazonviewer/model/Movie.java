@@ -3,11 +3,13 @@ package com.platzi.amazonviewer.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.platzi.amazonviewer.dao.IMovieDAO;
+
 /**
  * Hereda de {@link Film}.
  * Impleenta de {@link IVisualizable}
  */
-public class Movie extends Film implements IVisualizable {
+public class Movie extends Film implements IVisualizable, IMovieDAO {
 
 	private int timeViewed;
 
@@ -19,6 +21,10 @@ public class Movie extends Film implements IVisualizable {
 		this.timeViewed = timeViewed;
 	}
 
+	public Movie() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Movie(String title, String genre, String creator, int duration, short year) {
 		super(title, genre, creator, duration);
 		// TODO Auto-generated constructor stub
@@ -26,13 +32,9 @@ public class Movie extends Film implements IVisualizable {
 	}
 
 	public static ArrayList<Movie> makeMovies(){
-		ArrayList<Movie> movies = new ArrayList<Movie>();
-
-		for (int index = 0; index <= 5; index++) {
-			movies.add(new Movie("Movie "+ index, "Genero "+index, "Creator"+index,120+index,(short)(2017+index)));
-		}
-
-		return movies;
+		
+		Movie movie = new Movie();
+		return movie.read();
 	}
 
 	@Override

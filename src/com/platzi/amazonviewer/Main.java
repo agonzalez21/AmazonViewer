@@ -1,5 +1,6 @@
 package com.platzi.amazonviewer;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -23,14 +24,16 @@ import com.platzi.amazonviewer.model.Serie;
  */
 public class Main {
 
+	static java.sql.SQLException excepction = new java.sql.SQLException();
 	static ArrayList<Movie> movies = Movie.makeMovies();
-	static ArrayList<Serie> series = Serie.makeSeries();
-	static ArrayList<Book> books = Book.makeBooks();
-	static ArrayList<Magazine> magazines = Magazine.makeMagazines();
+	static ArrayList<Serie> series;// = Serie.makeSeries();
+	static ArrayList<Book> books;// = Book.makeBooks();
+	static ArrayList<Magazine> magazines; //= Magazine.makeMagazines();
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		
+		String message = excepction.toString();
+		System.out.println("Mensaje: " +message);
 		showMenu();
 	}
 
