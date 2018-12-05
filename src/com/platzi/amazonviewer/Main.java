@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import com.platzi.amazonviewer.lambdas.OnOneListener;
 import com.platzi.amazonviewer.model.Book;
 import com.platzi.amazonviewer.model.Chapter;
 import com.platzi.amazonviewer.model.Film;
@@ -32,9 +35,34 @@ public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+
+		ejemploLambda();
+
 		String message = excepction.toString();
 		System.out.println("Mensaje: " +message);
 		showMenu();
+	}
+
+	private static void ejemploLambda() {
+		// TODO Auto-generated method stub
+		OnOneListener oneListener = new OnOneListener() {
+
+			@Override
+			public void onOne(String message) {
+				// TODO Auto-generated method stub
+				System.out.println("One: " + message);
+			}
+		};
+
+		OnOneListener oneListener2 = (String string) ->{
+			System.out.println("One Lamda " + string);
+		};
+		
+		OnOneListener oneListener3 = mensaje->System.out.println("Mensaje:" + mensaje);
+		
+
+		oneListener.onOne("Sin lambda.");
+		oneListener2.onOne("Con lambda");
 	}
 
 	private static void showMenu() {
@@ -158,9 +186,14 @@ public class Main {
 		do {
 
 			System.out.println("\n --- Select your movie: ---");
+			
+			AtomicInteger atomicInteger = new AtomicInteger(1);
+			movies.forEach(m -> System.out.println(atomicInteger.getAndIncrement() +". "+ m.getTitle() + " "+m.getViewed()));
+			
+			/*
 			for (int index = 0; index < movies.size(); index++) {
 				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).getViewed());
-			}
+			}*/
 
 			System.out.println("0. Back.");
 			Scanner scan = new Scanner(System.in);
