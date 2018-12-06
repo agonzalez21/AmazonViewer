@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.alberto.makereport.Report;
 import com.platzi.amazonviewer.lambdas.OnOneListener;
 import com.platzi.amazonviewer.model.Book;
 import com.platzi.amazonviewer.model.Chapter;
@@ -57,9 +58,9 @@ public class Main {
 		OnOneListener oneListener2 = (String string) ->{
 			System.out.println("One Lamda " + string);
 		};
-		
+
 		OnOneListener oneListener3 = mensaje->System.out.println("Mensaje:" + mensaje);
-		
+
 
 		oneListener.onOne("Sin lambda.");
 		oneListener2.onOne("Con lambda");
@@ -100,6 +101,10 @@ public class Main {
 				Main.showMagazines();
 				break;
 
+			case 5:
+				Main.makeReport();
+				break;
+				
 			default:
 				break;
 			}
@@ -186,10 +191,10 @@ public class Main {
 		do {
 
 			System.out.println("\n --- Select your movie: ---");
-			
+
 			AtomicInteger atomicInteger = new AtomicInteger(1);
 			movies.forEach(m -> System.out.println(atomicInteger.getAndIncrement() +". "+ m.getTitle() + " "+m.getViewed()));
-			
+
 			/*
 			for (int index = 0; index < movies.size(); index++) {
 				System.out.println((index+1)+movies.get(index).getTitle() + " "+movies.get(index).getViewed());
@@ -262,6 +267,45 @@ public class Main {
 				chapterSelected.view();
 			}
 		}while(exit !=0);
+	}
+
+	public static void makeReport() {
+
+		Report report = new Report();
+		report.setNameFile("reporte");
+		report.setExtension("txt");
+		report.setTitle(":: VISTOS ::");
+		String contentReport = "";
+
+		for (Movie movie : movies) {
+			if (movie.getViewed()) {
+				contentReport += movie.toString() + "\n";
+
+			}
+		}
+
+//		for (Serie serie : series) {
+//			ArrayList<Chapter> chapters = serie.getChapters();
+//			for (Chapter chapter : chapters) {
+//				if (chapter.getViewed()) {
+//					contentReport += chapter.toString() + "\n";
+//
+//				}
+//			}	
+//		}
+
+
+//		for (Book book : books) {
+//			if (book.isReaded()) {
+//				contentReport += book.toString() + "\n";
+//
+//			}
+//		}
+
+		report.setContent(contentReport);
+		report.makeReport();
+		System.out.println("Reporte Generado");
+		System.out.println();
 	}
 
 }
