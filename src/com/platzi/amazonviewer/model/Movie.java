@@ -3,11 +3,13 @@ package com.platzi.amazonviewer.model;
 import java.util.ArrayList;
 import java.util.Date;
 
+import com.platzi.amazonviewer.dao.IMovieDAO;
+
 /**
- * Clase movie que contiene las propiedades de una
- * película.
+ * Hereda de {@link Film}.
+ * Impleenta de {@link IVisualizable}
  */
-public class Movie extends Film implements IVisualizable {
+public class Movie extends Film implements IVisualizable, IMovieDAO {
 
 	private int timeViewed;
 
@@ -19,6 +21,10 @@ public class Movie extends Film implements IVisualizable {
 		this.timeViewed = timeViewed;
 	}
 
+	public Movie() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Movie(String title, String genre, String creator, int duration, short year) {
 		super(title, genre, creator, duration);
 		// TODO Auto-generated constructor stub
@@ -26,13 +32,9 @@ public class Movie extends Film implements IVisualizable {
 	}
 
 	public static ArrayList<Movie> makeMovies(){
-		ArrayList<Movie> movies = new ArrayList<Movie>();
-
-		for (int index = 0; index <= 5; index++) {
-			movies.add(new Movie("Movie "+ index, "Genero "+index, "Creator"+index,120+index,(short)(2017+index)));
-		}
-
-		return movies;
+		
+		Movie movie = new Movie();
+		return movie.read();
 	}
 
 	@Override
@@ -45,12 +47,18 @@ public class Movie extends Film implements IVisualizable {
 				"\n Duration: " + getDuration();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * */
 	@Override
 	public Date startToSee(Date dateI) {
 		// TODO Auto-generated method stub
 		return dateI;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 * */
 	@Override
 	public void stopToSee(Date dateI, Date dateF) {
 		// TODO Auto-generated method stub
@@ -58,6 +66,26 @@ public class Movie extends Film implements IVisualizable {
 			setTimeViewed((int)(dateF.getTime()-dateI.getTime()));
 		else
 			setTimeViewed(0);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * */
+	@Override
+	public void view() {
+		setViewed(true);
+		Movie movie = new Movie();
+		movie.setMovieViewed(this);
+		Date dateStar = startToSee(new Date());
+
+		for (int i = 0; i < 10000; i++) {
+			System.out.println("Viewing ...");
+		}
+
+		stopToSee(dateStar, new Date());
+		System.out.println("");
+		System.out.println("Viste: " + toString());
+		System.out.println("Por: "+getTimeViewed() + " milisegundos");
 	}
 
 }

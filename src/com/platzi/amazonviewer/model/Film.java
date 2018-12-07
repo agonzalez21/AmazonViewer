@@ -1,6 +1,18 @@
 package com.platzi.amazonviewer.model;
 
-public class Film {
+/**
+ * <h1>Film</h1>
+ * Film es una clase abastracta.
+ * <p>
+ * Clase abastracta de la familia films. 
+ * Contiene el método 
+ * {@code view()} que es obligario implementar.
+ * 
+ * @author Alberto González Balderas
+ * @version 1.0
+ * @since 2018
+ * */
+public abstract class Film {
 	
 	protected int id;
 
@@ -19,8 +31,16 @@ public class Film {
 		this.duration = duration;
 	}
 	
+	public Film() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getTitle() {
@@ -63,7 +83,7 @@ public class Film {
 		this.year = year;
 	}
 
-	public boolean isViewed() {
+	public boolean getViewed() {
 		return viewed;
 	}
 
@@ -71,4 +91,8 @@ public class Film {
 		this.viewed = viewed;
 	}
 
+	/**
+	 * {@code view()} Método obligario de implementar.
+	 * */
+	public abstract void view();
 }
