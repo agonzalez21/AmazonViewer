@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import com.alberto.makereport.Report;
 import com.platzi.amazonviewer.lambdas.OnOneListener;
@@ -275,14 +277,28 @@ public class Main {
 		report.setNameFile("reporte");
 		report.setExtension("txt");
 		report.setTitle(":: VISTOS ::");
-		String contentReport = "";
+		StringBuilder contentReport = new StringBuilder();
 
+		movies.stream()
+		.filter(m -> m.getViewed())
+		.forEach(m-> contentReport.append(m.toString()+"\n"));;
+		
+		//Predicate<Serie> predicado = s -> s.getViewed();
+		//Consumer<Serie> seriesEach = m-> contentReport.append(m.toString()+"\n");
+		Consumer<Serie> seriesEach = s-> {
+			ArrayList<Chapter> chapters = s.getChapters();
+			chapters.stream().filter(c -> c.getViewed()).forEach(c-> contentReport.append(c.toString()+"\n"));
+		};
+		
+		series.stream().forEach(seriesEach);
+		
+		/*
 		for (Movie movie : movies) {
 			if (movie.getViewed()) {
 				contentReport += movie.toString() + "\n";
 
 			}
-		}
+		}*/
 
 //		for (Serie serie : series) {
 //			ArrayList<Chapter> chapters = serie.getChapters();
@@ -302,7 +318,7 @@ public class Main {
 //			}
 //		}
 
-		report.setContent(contentReport);
+		report.setContent(contentReport.toString());
 		report.makeReport();
 		System.out.println("Reporte Generado");
 		System.out.println();

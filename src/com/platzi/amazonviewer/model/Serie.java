@@ -37,7 +37,9 @@ public class Serie extends Film {
 		ArrayList<Serie> series = new ArrayList<Serie>();
 		
 		for (int index = 0; index <= 5; index++) {
-			series.add(new Serie("Serie " + index, "Genero "+index,"Creator "+index, (short)(2018+index),index));
+			Serie serie = new Serie("Serie " + index, "Genero "+index,"Creator "+index, (short)(2018+index),index);
+			serie.setChapters(Chapter.makeChaptersList(serie));
+			series.add(serie);
 		}
 		
 		return series;
